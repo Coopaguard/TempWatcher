@@ -21,7 +21,7 @@ namespace tempWatcher.Views
 
         private void BtnOk_Click(object sender, RoutedEventArgs e)
         {
-
+            //this.TVMonitor.Selected
             this.Close();
         }
 
@@ -36,7 +36,6 @@ namespace tempWatcher.Views
             {
                 var hardwareItem = new TreeViewItem{ 
                     Header = hardware.Name,
-                    IsEnabled = false,
                     IsExpanded = true,
                 };
                 foreach (IHardware subhardware in hardware.SubHardware)
@@ -44,7 +43,6 @@ namespace tempWatcher.Views
                     var subHardwareItem = new TreeViewItem
                     {
                         Header = subhardware.Name,
-                        IsEnabled = false,
                         IsExpanded = true,
                     };
                     foreach (ISensor sensor in subhardware.Sensors)
