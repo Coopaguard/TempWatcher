@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tempWatcher", "tempWatcher\tempWatcher.csproj", "{FAE7377F-6358-43DB-89A0-D2F8F804DF01}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FAE7377F-6358-43DB-89A0-D2F8F804DF01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAE7377F-6358-43DB-89A0-D2F8F804DF01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAE7377F-6358-43DB-89A0-D2F8F804DF01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAE7377F-6358-43DB-89A0-D2F8F804DF01}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E9B3104E-B181-4491-B5B9-95D058070A68}
+	EndGlobalSection
+EndGlobal
