@@ -21,6 +21,7 @@
             </MenuItem>
             <MenuItem Header="Image Source ..." Name="BackGroundImage" Click="BackGroundImage_Click" />
             <MenuItem Header="Ajouter un Element" Name="AddElement" Click="AddElement_Click" ></MenuItem>
+            <MenuItem Header="Fermer TempWatcher" Name="Close" Click="Close_Click"/>
         </ContextMenu>
     </Window.ContextMenu>
 </Window>

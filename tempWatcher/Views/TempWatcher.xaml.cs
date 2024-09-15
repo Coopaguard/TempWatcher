@@ -88,6 +88,11 @@ namespace tempWatcher.Views
             }
         }
 
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            App.Current.Shutdown();
+        }
+
         #endregion
 
         #region privates Windows
