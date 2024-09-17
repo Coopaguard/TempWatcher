@@ -59,6 +59,8 @@ namespace tempWatcher.Statics
 
         public bool AllayOnTop {  get; set; } = false;
 
+        public bool LockConfig { get; set; } = false;
+
         public Point? WindowSize {  get; set; }
         public Point? WindowLocation { get; set; }
 

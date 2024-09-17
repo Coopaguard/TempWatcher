@@ -78,6 +78,7 @@
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="Superposé (Overlay)" IsCheckable="True" IsChecked="{Binding Path=IsOverlay}"/>
+            <MenuItem Header="Verouillage de la configuration" IsCheckable="True" IsChecked="{Binding Path=IsLock}"/>
             <Separator/>
             <MenuItem Header="Ajouter un Element" Name="AddElement" Click="AddElement_Click" >
                 <MenuItem.Icon>

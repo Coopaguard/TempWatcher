@@ -33,7 +33,13 @@ namespace tempWatcher.Views
             _customLabel = sender;
 
             //Binding source
-            CbxFontFamily.ItemsSource = Lists.FontFamilies;
+            foreach (var f in Lists.FontFamilies)
+                CbxFontFamily.Items.Add(new ComboBoxItem
+                {
+                    Content = f,
+                    FontFamily = new FontFamily(f),
+                    IsSelected = f == _elementView.FontFamily
+                });
             CbxFontStrech.ItemsSource = Lists.FontsStrech.Select(w => w.Item1);
             CbxFontWeight.ItemsSource = Lists.FontsWeight.Select(w => w.Item1);
             AlphaColorSlider.Value = (double)_elementView.Foreground.A;

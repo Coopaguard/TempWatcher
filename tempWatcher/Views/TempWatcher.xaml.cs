@@ -161,6 +161,17 @@ namespace tempWatcher.Views
                 RefreshWindows();
             }
         }
+
+        public bool IsLock
+        {
+            get => ConfState.Cfg.LockConfig;
+            set
+            {
+                ConfState.Cfg.LockConfig = value;
+                RefreshWindows();
+            }
+        }
+
         #endregion
 
         #region Context Menu
@@ -286,6 +297,9 @@ namespace tempWatcher.Views
             //refreshDataContext;
             this.DataContext = null;
             this.DataContext = this;
+
+            //Lock Grid
+            this.MainContainer.IsEnabled = !ConfState.Cfg.LockConfig;
         }
 
         public void RefreshElements()
