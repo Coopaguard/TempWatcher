@@ -1,0 +1,45 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: CD .NET
+
+on:
+  label:
+    types:
+      - created
+    branches:
+    - master
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - name: Chcckout Project
+      uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Build
+      run: dotnet publish -r win-x64 --self-contained true -c Release -verbosity:minimal
+
+    - name: Create msi
+      shell: pwsh
+      run: |
+        dotnet tool install --global wix
+        wix build ./TempWatcher.wxs
+
+    - name: Upload MSI for Windows to release page
+      uses: "marvinpinto/action-automatic-releases@latest"
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        automatic_release_tag: "windows"
+        prerelease: false
+        title: "Windows x64 Installer"
+        files: |
+          TempWatcher.msi
+          TempWatcher.wixpdb
