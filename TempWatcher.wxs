@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Package 
+    Name="SpeechSynth" 
+    Manufacturer="CoopaTech"
+    Compressed="true"
+    Scope="perMachine"
+    Version="1.0.0.0" 
+    UpgradeCode="c9cbd32c-0db8-40e5-a43c-df6f30a1d7d7">
+
+    <MediaTemplate EmbedCab="yes" />
+
+	<Icon Id="WINDOWS.ico" SourceFile=".\tempWatcher\bin\Release\net8.0-windows\win-x64\publish\Images\temperature-half-solid.ico" />
+	<Property Id="ARPPRODUCTICON" Value=".\tempWatcher\bin\Release\net8.0-windows\win-x64\publish\Image\temperature-half-solidk.ico" />
+	
+    <StandardDirectory Id="ProgramFiles64Folder">
+        <Directory Id="INSTALLFOLDER" Name="TempWatcher">
+          <Directory Id="Images" Name="Images">
+          </Directory>
+          <Directory Id="runtimes" Name="runtimes">
+            <Directory Id="TargetRuntime" Name="win-x64">
+            </Directory>
+          </Directory>
+        </Directory>
+    </StandardDirectory>
+
+    <StandardDirectory Id="ProgramMenuFolder">
+      <Component Id="ApplicationShortcut" Guid="7a51e7a5-e33e-4893-8dc9-f48f546e1341">
+        <Shortcut Id="ApplicationStartMenuShortcut"
+                  Name="SpeechSynth"
+                  Description="Speech to texte application"
+                  Target="[#ExeComp]"
+                  WorkingDirectory="INSTALLFOLDER"/>
+        <RemoveFolder Id="CleanUpShortCut" Directory="ProgramMenuFolder" On="uninstall"/>
+        <RegistryValue Root="HKCU" Key="Software\Coopatech\TempWatcher" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+    </StandardDirectory>
+
+	  <ComponentGroup
+		  Id="dllComp"
+		  Directory="Images"
+		  Source=".\TempWatcher\bin\Release\net8.0-windows\win-x64\publish\Images">
+		  <Files Include="*.*" />
+	  </ComponentGroup>
+
+	  <ComponentGroup
+		  Id="ImgComp"
+		  Directory="INSTALLFOLDER"
+		  Source=".\TempWatcher\bin\Release\net8.0-windows\win-x64\publish">
+		  <Files Include="*.dll" />
+	  </ComponentGroup>
+
+    <CustomAction 
+      Id="EXECUTE_AFTER_FINALIZE"
+      Execute="immediate"
+      Impersonate="no"
+      Return="asyncNoWait"
+      FileRef="ExeComp"
+      ExeCommand="" />
+
+    <InstallExecuteSequence>
+      <Custom Action="EXECUTE_AFTER_FINALIZE" After="InstallFinalize"></Custom>
+    </InstallExecuteSequence>
+	  
+	  <Feature 
+		  Id="MainComponent"
+		  Title="Installer" 
+		  Level="1"
+		  Description="The complete installation"
+		  Display="expand"
+		  ConfigurableDirectory="INSTALLFOLDER">
+		<Component Id="ExeComp" Guid="823ee2b2-2523-4104-9e59-3bb4fb83ce30" >
+			<File Source=".\tempWqatcher\bin\Release\net8.0-windows\win-x64\publish\TempWatcher.exe" Id="ExeComp"  KeyPath="yes" />
+		</Component>
+		<ComponentGroupRef Id="dllComp" />
+		<ComponentGroupRef Id="ImgComp" />
+    <ComponentRef Id="ApplicationShortcut" />
+	</Feature>
+  </Package>
+</Wix>
