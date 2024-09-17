@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="tempWatcher.Customs.CustomLabel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:tempWatcher.Customs"
+             mc:Ignorable="d"
+             MouseMove="UserControl_MouseMove"
+             VerticalAlignment="Top"
+             HorizontalAlignment="Left"
+             Margin="{Binding Path=Element.RatioPoint}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Viewbox Stretch="None">
+        <Label Name="TextLbl" FontFamily="{Binding Path=Element.FontFamily, Mode=OneWay}" FontSize="{Binding Path=Element.FontSize, Mode=OneWay}"
+               FontStretch="{Binding Path=Element.FontStrech, Mode=OneWay}" FontStyle="{Binding Path=Element.FontStyle, Mode=OneWay}" 
+               FontWeight="{Binding Path=Element.FontWeight, Mode=OneWay}" Foreground="{Binding Path=Element.Foreground, Mode=OneWay}" />
+    </Viewbox>
+    <UserControl.ContextMenu>
+        <ContextMenu>
+            <MenuItem x:Name="Edit" Header="Modifier la mise en forme" Click="Edit_Click">
+                <MenuItem.Icon>
+                    <Image Source="..\Images\pen-solid.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem x:Name="DelSensor" Header="Supprimer cette valeur" Click="DelSensor_Click">
+                <MenuItem.Icon>
+                    <Image Source="..\Images\minus-solid.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
+    </UserControl.ContextMenu>
+</UserControl>

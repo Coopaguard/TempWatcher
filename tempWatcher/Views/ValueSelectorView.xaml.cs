@@ -21,7 +21,10 @@ namespace tempWatcher.Views
 
         private void BtnOk_Click(object sender, RoutedEventArgs e)
         {
-            //this.TVMonitor.Selected
+            var selected = ((TreeViewItem)this.TVMonitor.SelectedItem).Tag as string;
+            if (!string.IsNullOrEmpty(selected)) {
+                SelectedValue = selected;
+            }
             this.Close();
         }
 
@@ -32,9 +35,10 @@ namespace tempWatcher.Views
 
         public void ListSensor()
         {
-            foreach (IHardware hardware in UpdateVisitor.Monitors())
+            foreach (IHardware hardware in HwMonitor.HwList)
             {
-                var hardwareItem = new TreeViewItem{ 
+                var hardwareItem = new TreeViewItem
+                {
                     Header = hardware.Name,
                     IsExpanded = true,
                 };
@@ -61,11 +65,12 @@ namespace tempWatcher.Views
                     hardwareItem.Items.Add(new TreeViewItem
                     {
                         Header = $"{sensor.Name}: {sensor.Value} {sensor.SensorType}",
+                        Tag = sensor.Identifier.ToString(),
                         IsEnabled = true
                     });
                 }
 
-                TVMonitor.Items.Add(hardwareItem);
+                this.TVMonitor.Items.Add(hardwareItem);
             }
         }
     }

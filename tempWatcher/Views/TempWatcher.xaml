@@ -3,25 +3,99 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:tempWatcher.Views"
+        xmlns:local="clr-namespace:tempWatcher.Views" xmlns:tb="http://www.hardcodet.net/taskbar"
         mc:Ignorable="d"
         Title="TempWatcher" Height="450" Width="800"
         WindowState="Normal"
         WindowStyle="None"
         ResizeMode="CanResize"
-        Closing="Window_Closing">
-    <Grid x:Name="MainContainer">
-        <Image x:Name="BackgroundImage"/>
+        ShowInTaskbar="False"
+        ShowActivated="True"
+        Closing="Window_Closing"
+        SizeChanged="Window_SizeChanged"
+        LocationChanged="Window_LocationChanged"
+        Icon="..\Images\temperature-half-solid.png">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="0" CornerRadius="0" CaptionHeight="0"/>
+    </WindowChrome.WindowChrome>
+
+    <Grid x:Name="MainContainer" MouseMove="MainContainer_MouseMove">
+        <Image x:Name="BackgroundImage"
+        MouseLeftButtonDown="Window_MouseDown"/>
+
+        <tb:TaskbarIcon x:Name="myNotifyIcon"
+            Visibility="Visible"
+            IconSource="..\Images\temperature-half-solid.ico"
+            ToolTipText="Temp Watcher"
+            MenuActivation="LeftOrRightClick"
+            PopupActivation="DoubleClick">
+            <tb:TaskbarIcon.ContextMenu>
+                <ContextMenu >
+                    <MenuItem Header="Rendre visible" Name="TrayOverlay" Click="TrayOverlay_Click" >
+                        <MenuItem.Icon>
+                            <Image Source="..\Images\arrow-turn-up-solid.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Fermer TempWatcher" Name="TrayClose" Click="TrayClose_Click" >
+                        <MenuItem.Icon>
+                            <Image Source="..\Images\circle-xmark-regular.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </ContextMenu>
+            </tb:TaskbarIcon.ContextMenu>
+        </tb:TaskbarIcon>
     </Grid>
     <Window.ContextMenu>
-        <ContextMenu>
+        <ContextMenu Opened="ContextMenu_Opened" Name="ContextMenuMain">
             <MenuItem Header="Format fenêtre">
-                <MenuItem Header="Normal" IsChecked="{Binding Path=IsNormalState}" IsCheckable="True" />
-                <MenuItem Header="Maximize" IsChecked="{Binding Path=IsMaximizeState}" IsCheckable="True" />
+                <MenuItem.Icon>
+                    <Image Source="..\Images\up-right-and-down-left-from-center-solid.png"/>
+                </MenuItem.Icon>
+                <MenuItem Header="Normal" IsChecked="{Binding Path=IsNormalState}" IsCheckable="True" >
+                </MenuItem>
+                <MenuItem Header="Maximize" IsChecked="{Binding Path=IsMaximizeState}" IsCheckable="True" >
+                </MenuItem>
             </MenuItem>
-            <MenuItem Header="Image Source ..." Name="BackGroundImage" Click="BackGroundImage_Click" />
-            <MenuItem Header="Ajouter un Element" Name="AddElement" Click="AddElement_Click" ></MenuItem>
-            <MenuItem Header="Fermer TempWatcher" Name="Close" Click="Close_Click"/>
+            <MenuItem Header="Image Source ..." Name="BackGroundImage" Click="BackGroundImage_Click" >
+                <MenuItem.Icon>
+                    <Image Source="..\Images\images-regular.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Format de l'image">
+                <MenuItem.Icon>
+                    <Image Source="..\Images\display-solid.png"/>
+                </MenuItem.Icon>
+                <MenuItem Header="Remplissage" IsCheckable="True" IsChecked="{Binding Path=IsStrechFill}"></MenuItem>
+                <MenuItem Header="Uniforme" IsCheckable="True" IsChecked="{Binding Path=IsStrechUniform}"></MenuItem>
+                <MenuItem Header="Remplissage et uniforme" IsCheckable="True" IsChecked="{Binding Path=IsStrechUniformToFill}"></MenuItem>
+                <MenuItem Header="Défaut" IsCheckable="True" IsChecked="{Binding Path=IsStrechNone}"></MenuItem>
+            </MenuItem>
+            <Separator/>
+            <MenuItem Header="Ecran" Name="ScreenSelector">
+                <MenuItem.Icon>
+                    <Image Source="..\Images\display-solid.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Superposé (Overlay)" IsCheckable="True" IsChecked="{Binding Path=IsOverlay}"/>
+            <Separator/>
+            <MenuItem Header="Ajouter un Element" Name="AddElement" Click="AddElement_Click" >
+                <MenuItem.Icon>
+                    <Image Source="..\Images\plus-solid.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator/>
+            <MenuItem Header="Démarrer avec Windows" IsCheckable="True" Name="StartWithWindows" Click="StartWithWindows_Click"></MenuItem>
+            <MenuItem Header="Sauvegarder ma configuration" Name="Save" Click="Save_Click">
+                <MenuItem.Icon>
+                    <Image Source="..\Images\floppy-disk-solid.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Fermer TempWatcher" Name="CloseAct" Click="Close_Click">
+                <MenuItem.Icon>
+                    <Image Source="..\Images\circle-xmark-regular.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
         </ContextMenu>
     </Window.ContextMenu>
 </Window>

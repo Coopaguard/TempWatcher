@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
+﻿using System.IO;
 using System.Windows;
-using System.IO;
-using System.Runtime.CompilerServices;
+using System.Windows.Media;
 
 namespace tempWatcher.Statics
 {
@@ -26,38 +20,47 @@ namespace tempWatcher.Statics
 
         #endregion
 
-        public static Config Cfg = new Config();
+        public static Config Cfg = new();
 
         public static void Save()
         {
             File.WriteAllText(_cfgFile, System.Text.Json.JsonSerializer.Serialize(Cfg, serialiserOption));
         }
 
-        public static void Load() 
+        public static void Load()
         {
             if (File.Exists(_cfgFile))
             {
                 try
                 {
-                    System.Text.Json.JsonSerializer.Deserialize<Config>(File.ReadAllText(_cfgFile), serialiserOption);
+                    Cfg = System.Text.Json.JsonSerializer.Deserialize<Config>(File.ReadAllText(_cfgFile), serialiserOption) ?? new();
                 }
                 catch
                 {
                     Cfg = new Config();
                 }
             }
-
-            Cfg = new Config();
+            else
+            {
+                Cfg = new Config();
+            }
         }
     }
 
     public sealed class Config
     {
-        public string? BackgroundImagePath = null;
+        public string? BackgroundImagePath { get; set; } = null;
 
-        public WindowState WindowState = WindowState.Normal;
+        public Stretch BackgroundStrech { get; set; } = Stretch.None;
 
-        public int WindowsScreen = 1;
+        public WindowState WindowState { get; set; } = WindowState.Normal;
+
+        public string WindowsScreen { get; set; } = string.Empty;
+
+        public bool AllayOnTop {  get; set; } = false;
+
+        public Point? WindowSize {  get; set; }
+        public Point? WindowLocation { get; set; }
 
         public List<ElementView> ElementViews { get; set; } = [];
     }
@@ -66,14 +69,14 @@ namespace tempWatcher.Statics
     public class ElementView
     {
         public string CpuidPath { get; set; } = "";
-        public string FontFamily { get; set; } = new FontFamily().FamilyNames.Values.First();
-        public int FontSize { get; set; } = 12;
+        public string FontFamily { get; set; } = "Lucida Console";
+        public int FontSize { get; set; } = 20;
         public FontStyle FontStyle { get; set; } = FontStyles.Normal;
         public FontStretch FontStretch { get; set; } = FontStretches.Normal;
         public FontWeight FontWeight { get; set; } = FontWeights.Normal;
         public Color Foreground { get; set; } = Colors.BlanchedAlmond;
 
-        public Point RatioPoint { get; set; } = new Point(0, 0);
+        public Thickness RatioPoint { get; set; } = new Thickness();
 
         public ElementView()
         {

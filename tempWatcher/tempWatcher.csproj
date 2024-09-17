@@ -10,7 +10,66 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\arrow-turn-up-solid.png" />
+    <None Remove="Images\circle-xmark-regular.png" />
+    <None Remove="Images\display-solid.png" />
+    <None Remove="Images\display-solid.svg" />
+    <None Remove="Images\floppy-disk-solid.png" />
+    <None Remove="Images\images-regular.png" />
+    <None Remove="Images\minus-solid.png" />
+    <None Remove="Images\pen-solid.png" />
+    <None Remove="Images\plus-solid.png" />
+    <None Remove="Images\temperature-half-solid.ico" />
+    <None Remove="Images\temperature-half-solid.png" />
+    <None Remove="Images\temperature-half-solid.svg" />
+    <None Remove="Images\up-right-and-down-left-from-center-solid.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
     <PackageReference Include="LibreHardwareMonitorLib" Version="0.9.3" />
+    <PackageReference Include="PixiEditor.ColorPicker" Version="3.4.1" />
+    <PackageReference Include="WpfScreenHelper" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\arrow-turn-up-solid.png" />
+    <Resource Include="Images\circle-xmark-regular.png" />
+    <Resource Include="Images\display-solid.png" />
+    <Resource Include="Images\floppy-disk-solid.png" />
+    <Resource Include="Images\images-regular.png" />
+    <Resource Include="Images\minus-solid.png" />
+    <Resource Include="Images\pen-solid.png" />
+    <Resource Include="Images\plus-solid.png" />
+    <Resource Include="Images\temperature-half-solid.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\temperature-half-solid.png" />
+    <Resource Include="Images\up-right-and-down-left-from-center-solid.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Images\down-left-and-up-right-to-center-solid.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\floppy-disk-solid.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\images-regular.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\minus-solid.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\plus-solid.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\up-down-left-right-solid.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\up-right-and-down-left-from-center-solid.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   
 </Project>

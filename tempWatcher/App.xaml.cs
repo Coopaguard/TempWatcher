@@ -1,6 +1,5 @@
-﻿using System.Configuration;
-using System.Data;
-using System.Windows;
+﻿using System.Windows;
+using tempWatcher.Statics;
 
 namespace tempWatcher
 {
@@ -9,6 +8,9 @@ namespace tempWatcher
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            HwMonitor.Init();
+        }
     }
-
 }
