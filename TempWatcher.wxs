@@ -70,7 +70,7 @@
 		  Display="expand"
 		  ConfigurableDirectory="INSTALLFOLDER">
 		<Component Id="ExeComp" Guid="823ee2b2-2523-4104-9e59-3bb4fb83ce30" >
-			<File Source=".\tempWqatcher\bin\Release\net8.0-windows\win-x64\publish\TempWatcher.exe" Id="ExeComp"  KeyPath="yes" />
+			<File Source=".\tempWatcher\bin\Release\net8.0-windows\win-x64\publish\TempWatcher.exe" Id="ExeComp"  KeyPath="yes" />
 		</Component>
 		<ComponentGroupRef Id="dllComp" />
 		<ComponentGroupRef Id="ImgComp" />
