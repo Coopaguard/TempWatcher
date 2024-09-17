@@ -10,8 +10,8 @@
 
     <MediaTemplate EmbedCab="yes" />
 
-	<Icon Id="WINDOWS.ico" SourceFile=".\tempWatcher\bin\Release\net8.0-windows\win-x64\publish\Images\temperature-half-solid.ico" />
-	<Property Id="ARPPRODUCTICON" Value=".\tempWatcher\bin\Release\net8.0-windows\win-x64\publish\Image\temperature-half-solidk.ico" />
+	<Icon Id="WINDOWS.ico" SourceFile=".\tempWatcher\Images\temperature-half-solid.ico" />
+	<Property Id="ARPPRODUCTICON" Value=".\tempWatcher\Images\temperature-half-solidk.ico" />
 	
     <StandardDirectory Id="ProgramFiles64Folder">
         <Directory Id="INSTALLFOLDER" Name="TempWatcher">
