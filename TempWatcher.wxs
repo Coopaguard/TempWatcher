@@ -10,8 +10,8 @@
 
     <MediaTemplate EmbedCab="yes" />
 
-	<Icon Id="WINDOWS.ico" SourceFile=".\tempWatcher\Images\temperature-half-solid.ico" />
-	<Property Id="ARPPRODUCTICON" Value=".\tempWatcher\Images\temperature-half-solidk.ico" />
+	<Icon Id="WINDOWS.ico" SourceFile=".\tempWatcher\bin\Release\net8.0-windows\win-x64\publish\Images\temperature-half-solid - Copier.ico" />
+	<Property Id="ARPPRODUCTICON" Value=".\tempWatcher\bin\Release\net8.0-windows\win-x64\publish\Images\temperature-half-solid - Copier.ico" />
 	
     <StandardDirectory Id="ProgramFiles64Folder">
         <Directory Id="INSTALLFOLDER" Name="TempWatcher">
@@ -28,7 +28,7 @@
       <Component Id="ApplicationShortcut" Guid="7a51e7a5-e33e-4893-8dc9-f48f546e1341">
         <Shortcut Id="ApplicationStartMenuShortcut"
                   Name="TempWatcher"
-                  Description="Speech to texte application"
+                  Description="Temwatcher is is a .net System Sensor view overlay"
                   Target="[#ExeComp]"
                   WorkingDirectory="INSTALLFOLDER"/>
         <RemoveFolder Id="CleanUpShortCut" Directory="ProgramMenuFolder" On="uninstall"/>
