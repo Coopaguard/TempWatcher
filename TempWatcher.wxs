@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
   <Package 
-    Name="SpeechSynth" 
+    Name="TempWatcher" 
     Manufacturer="CoopaTech"
     Compressed="true"
     Scope="perMachine"
@@ -27,7 +27,7 @@
     <StandardDirectory Id="ProgramMenuFolder">
       <Component Id="ApplicationShortcut" Guid="7a51e7a5-e33e-4893-8dc9-f48f546e1341">
         <Shortcut Id="ApplicationStartMenuShortcut"
-                  Name="SpeechSynth"
+                  Name="TempWatcher"
                   Description="Speech to texte application"
                   Target="[#ExeComp]"
                   WorkingDirectory="INSTALLFOLDER"/>
