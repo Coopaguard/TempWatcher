@@ -168,7 +168,7 @@ namespace tempWatcher.Views
             set
             {
                 ConfState.Cfg.LockConfig = value;
-                RefreshWindows();
+                this.MainContainer.IsEnabled = !value;
             }
         }
 
@@ -362,7 +362,6 @@ namespace tempWatcher.Views
         }
 
         #endregion
-
 
     }
 }
