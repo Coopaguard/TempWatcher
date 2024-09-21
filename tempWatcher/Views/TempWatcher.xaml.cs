@@ -1,13 +1,11 @@
 ﻿using Microsoft.Win32;
 using System.IO;
-using System.Reflection.PortableExecutable;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using tempWatcher.Customs;
 using tempWatcher.Statics;
 using WpfScreenHelper;
@@ -23,6 +21,7 @@ namespace tempWatcher.Views
         readonly Task SyncRunner;
         readonly CancellationTokenSource Canceler = new();
         readonly CancellationToken CancelToken;
+        private bool _isReloading = false;
 
         public TempWatcher()
         {
@@ -162,6 +161,16 @@ namespace tempWatcher.Views
             }
         }
 
+        public bool IsTransparent
+        {
+            get => ConfState.Cfg.IsTransluent && File.Exists(ConfState.Cfg.BackgroundImagePath);
+            set
+            {
+                ConfState.Cfg.IsTransluent = value && File.Exists(ConfState.Cfg.BackgroundImagePath);
+                RefreshWindows();
+            }
+        }
+
         public bool IsLock
         {
             get => ConfState.Cfg.LockConfig;
@@ -242,7 +251,7 @@ namespace tempWatcher.Views
                 ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
 
             if (rk != null && this.StartWithWindows.IsChecked)
-                rk.SetValue(this.Name, System.Reflection.Assembly.GetExecutingAssembly().Location);
+                rk.SetValue(this.Name, Environment.ProcessPath);
             if (rk != null && !this.StartWithWindows.IsChecked)
                 rk.DeleteValue(this.Name, false);
         }
@@ -269,9 +278,25 @@ namespace tempWatcher.Views
             if (string.IsNullOrEmpty(ConfState.Cfg.WindowsScreen))
                 ConfState.Cfg.WindowsScreen = Screen.PrimaryScreen.DeviceName;
 
+            _isReloading = true;
             this.SetWindowPosition(
                 WindowPositions.Center,
                 Screen.AllScreens.First(s => s.DeviceName == ConfState.Cfg.WindowsScreen));
+
+            if(File.Exists(ConfState.Cfg.BackgroundImagePath) && ConfState.Cfg.IsTransluent)
+            {
+                this.Background = new SolidColorBrush(Colors.Transparent);
+            }
+            else
+            {
+                this.Background = new SolidColorBrush(Colors.LightGray);
+            }
+
+            Task.Run(() =>
+            {
+                Thread.Sleep(100);
+                _isReloading = false;
+            });
 
             this.Topmost = ConfState.Cfg.AllayOnTop;
 
@@ -318,7 +343,7 @@ namespace tempWatcher.Views
         {
             if (e.LeftButton == MouseButtonState.Pressed && MovingElement != null)
             {
-                Point position = e.GetPosition(this);
+                System.Windows.Point position = e.GetPosition(this);
                 MovingElement.Margin = new Thickness(position.X, position.Y, 0, 0);
             }
 
@@ -343,7 +368,8 @@ namespace tempWatcher.Views
 
         private void Window_LocationChanged(object sender, EventArgs e)
         {
-            ConfState.Cfg.WindowLocation = new Point(this.Left, this.Top);
+            if (!_isReloading)
+                ConfState.Cfg.WindowLocation = new System.Windows.Point(this.Left, this.Top);
         }
 
         #endregion
@@ -361,8 +387,13 @@ namespace tempWatcher.Views
             RefreshWindows();
         }
 
+
         #endregion
 
-
+        private void Transparency_Click(object sender, RoutedEventArgs e)
+        {
+            var val = Convert.ToDouble(((MenuItem)sender).Tag as string);
+            this.BackGroundImage.Opacity = val;
+        }
     }
 }

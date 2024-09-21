@@ -11,6 +11,9 @@
         ResizeMode="CanResize"
         ShowInTaskbar="False"
         ShowActivated="True"
+        AllowsTransparency="True"
+        Background="LightGray"
+        Opacity="1"
         Closing="Window_Closing"
         SizeChanged="Window_SizeChanged"
         LocationChanged="Window_LocationChanged"
@@ -22,7 +25,7 @@
 
     <Grid x:Name="MainContainer" MouseMove="MainContainer_MouseMove">
         <Image x:Name="BackgroundImage"
-        MouseLeftButtonDown="Window_MouseDown"/>
+        MouseLeftButtonDown="Window_MouseDown" Margin="0,0,0,0" />
 
         <tb:TaskbarIcon x:Name="myNotifyIcon"
             Visibility="Visible"
@@ -70,6 +73,8 @@
                 <MenuItem Header="Uniforme" IsCheckable="True" IsChecked="{Binding Path=IsStrechUniform}"></MenuItem>
                 <MenuItem Header="Remplissage et uniforme" IsCheckable="True" IsChecked="{Binding Path=IsStrechUniformToFill}"></MenuItem>
                 <MenuItem Header="Défaut" IsCheckable="True" IsChecked="{Binding Path=IsStrechNone}"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Transparence" IsCheckable="True" IsChecked="{Binding Path=IsTransparent}">
             </MenuItem>
             <Separator/>
             <MenuItem Header="Ecran" Name="ScreenSelector">
